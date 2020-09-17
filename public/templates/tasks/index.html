@@ -1,0 +1,36 @@
+<div class="tasks-container" tasks-directive>
+  <p class="section-title">To dos</p>
+
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th>Full Name</th>
+          <th>Task</th>
+          <th>Date</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="list in toListArr">
+          <td ng-bind="list.name"></td>
+          <td ng-bind="list.task">Clean the kitchen</td>
+          <td ng-bind="list.date">04/05/20</td>
+          <td ng-bind="list.status">Pending</td>
+          <td>
+            <button class="btn" ng-click="editToDo(list, $index)">Edit</button>
+            <button class="btn" ng-click="deleteTodo(list, $index)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+
+
+<style scoped>
+  @import url('../../templates/tasks/style.css'); 
+</style>

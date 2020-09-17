@@ -24,4 +24,5 @@
   <!-- directives -->
   <script src="../../templates/home/function.js"></script>
   <script src="../../templates/profile/function.js"></script>
+  <script src="../../templates/tasks/function.js"></script>
 </html>
