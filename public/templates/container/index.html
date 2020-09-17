@@ -1,0 +1,17 @@
+<div class="main-container">
+  <div class="header-container">
+    <ul>
+      <li>
+        <a href="javascript:void(0)" ui-sref="container.home" ui-sref-active="active">Home</a>
+      </li>
+      <li>
+        <a href="javascript:void(0)" ui-sref="container.profile" ui-sref-active="active">Profile</a>
+      </li>
+    </ul>
+  </div>
+  <div class="content-container" ui-view="child-content"></div>
+</div>
+
+<style scoped>
+  @import url('../../templates/container/style.css'); 
+</style>

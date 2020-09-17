@@ -1,0 +1,53 @@
+<div class="profile-container" profile-directive>
+  <div class="update-form-container">
+    <form>
+      <div class="input-div">
+        <label for="">Name</label>
+        <input type="text" ng-model="updateProfileData.name">
+      </div>
+
+      <div class="input-div">
+        <label for="">Email</label>
+        <input type="email" ng-model="updateProfileData.email">
+      </div>
+
+      <div class="input-div">
+        <label for="">Age</label>
+        <input type="number" ng-model="updateProfileData.age">
+      </div>
+
+      <div class="input-div text-right">
+        <button class="btn" ng-click="updateUserInfo( updateProfileData )">Update</button>
+      </div>
+    </form>
+  </div>
+
+
+  <div class="user-info-container">
+    <p class="section-title">User information</p>
+    <div class="info-div">
+      <p>
+        <label>Full Name:</label><span ng-bind="userInfoData.name"></span>
+      </p>
+    </div>
+
+    <div class="info-div">
+      <p>
+        <label>Email:</label><span ng-bind="userInfoData.email"></span>
+      </p>
+    </div>
+
+    <div class="info-div">
+      <p>
+        <label>Age:</label><span ng-bind="userInfoData.age"></span>
+      </p>
+    </div>
+  </div>
+</div>
+
+
+
+
+<style scoped>
+  @import url('../../templates/profile/style.css'); 
+</style>
