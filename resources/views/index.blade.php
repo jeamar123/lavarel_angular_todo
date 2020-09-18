@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="./css/sweetalert.css">
     <link rel="stylesheet" href="./css/fonts.css">
   </head>
+  
   <body>
     <div ui-view="main-content"></div>
   </body>
@@ -25,4 +26,5 @@
   <script src="../../templates/home/function.js"></script>
   <script src="../../templates/profile/function.js"></script>
   <script src="../../templates/tasks/function.js"></script>
+  <script src="../../templates/mike/function.js"></script>
 </html>

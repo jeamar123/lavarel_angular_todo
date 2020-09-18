@@ -41,6 +41,14 @@ app.config(function($stateProvider, $urlRouterProvider){
         }
       },
     })
+    .state('container.mike',{
+      url: '/mike',
+      views:{
+        'child-content@container':{
+          templateUrl: 'templates/mike/index.html'
+        }
+      }
+    })
     
     $urlRouterProvider.otherwise('/container');
     
