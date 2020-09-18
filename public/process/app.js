@@ -16,30 +16,46 @@ app.config(function($stateProvider, $urlRouterProvider){
         },
       },
     })
-        .state('container.home', {
-          url: '/home',
-          views: {
-            'child-content@container': {
-              templateUrl: 'templates/home/index.html'
-            }
-          },
-        })
-        .state('container.profile', {
-          url: '/profile',
-          views: {
-            'child-content@container': {
-              templateUrl: 'templates/profile/index.html'
-            }
-          },
-        })
-        .state('container.tasks', {
-          url: '/tasks',
-          views: {
-            'child-content@container': {
-              templateUrl: 'templates/tasks/index.html'
-            }
-          },
-        })
+    .state('container.home', {
+      url: '/home',
+      views: {
+        'child-content@container': {
+          templateUrl: 'templates/home/index.html'
+        }
+      },
+    })
+    .state('container.profile', {
+      url: '/profile',
+      views: {
+        'child-content@container': {
+          templateUrl: 'templates/profile/index.html'
+        }
+      },
+    })
+    .state('container.tasks', {
+      url: '/tasks',
+      views: {
+        'child-content@container': {
+          templateUrl: 'templates/tasks/index.html'
+        }
+      },
+    })
+    .state('container.mike',{
+      url: '/mike',
+      views:{
+        'child-content@container':{
+          templateUrl: 'templates/mike/index.html'
+        }
+      }
+    })
+    .state('container.users',{
+      url: '/users',
+      views:{
+        'child-content@container':{
+          templateUrl: 'templates/users/index.html'
+        }
+      }
+    })
     
     $urlRouterProvider.otherwise('/container/home');
     

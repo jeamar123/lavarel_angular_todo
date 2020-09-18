@@ -1,0 +1,88 @@
+<div class="users-container" users-directive>
+  <div>
+    <p class="section-title">Users</p>
+
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Full Name</th>
+            <th>Gender</th>
+            <th>Age</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="list in usersArr">
+            <td ng-bind="list.id"></td>
+            <td ng-bind="list.name"></td>
+            <td ng-bind="list.gender">Male</td>
+            <td ng-bind="list.age">25</td>
+            <td ng-bind="list.status">Pending</td>
+            <td>
+              <button class="btn">Edit</button>
+              <button class="btn">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div>
+    <form>
+      <div class="input-div">
+        <label for="">ID</label>
+        <input type="text" ng-model="addUserData.id">
+      </div>
+
+      <div class="input-div">
+        <label for="">Name</label>
+        <input type="text" ng-model="addUserData.name">
+      </div>
+
+      <div class="input-div">
+        <label for="">Gender</label>
+        <select ng-model="addUserData.gender">
+          <option value=""></option>
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+        </select>
+      </div>
+
+      <div class="input-div">
+        <label for="">Age</label>
+        <input type="number" ng-model="addUserData.age">
+      </div>
+
+      <div class="input-div">
+        <label for="">Status</label>
+        <select ng-model="addUserData.status">
+          <option value=""></option>
+          <option value="to do">To do</option>
+          <option value="in progress">In progress</option>
+          <option value="done">Done</option>
+        </select>
+      </div>
+
+      <div class="input-div text-right">
+        <button 
+          class="btn" 
+          ng-disabled="!addUserData.id || !addUserData.name || !addUserData.gender || !addUserData.age || !addUserData.status" 
+          ng-click="submitAddUser( addUserData )"
+        >
+          Update
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+
+
+<style scoped>
+  @import url('../../templates/users/style.css'); 
+</style>
