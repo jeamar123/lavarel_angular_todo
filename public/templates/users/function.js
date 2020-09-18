@@ -17,6 +17,9 @@ app.directive('usersDirective', [
             .success(function(response){
               console.log(response);
               scope.usersArr = response;
+            })
+            .error(function(response){
+              console.log(response);
             });
         }
 
