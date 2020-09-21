@@ -16,7 +16,7 @@
               <td ng-bind="list.gender"></td>
               <td ng-bind="list.status"></td>
               <td>
-                <button class="btn" ng-click="editUser(list)">Edit</button>
+                <button class="btn" ng-click="editUser(list, $index)">Edit</button>
                 <button class="btn" ng-click="deleteName(list, $index)">Delete</button>
               </td>
             </tr>

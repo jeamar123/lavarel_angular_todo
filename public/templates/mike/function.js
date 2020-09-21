@@ -61,21 +61,22 @@ app.directive('mikeDirective',[
             let editModal = document.querySelector('.edit__modal');
              // open edit
              scope.user ={};
-             scope.editUser = (list) =>{
-                editModal.setAttribute('style','display:block')
+             scope.editUser = (list,index) =>{
+                editModal.setAttribute('style','display:block');
+                scope.user.index = index;
                 scope.user.name = list.name;
                 scope.user.gender = list.gender;
                 scope.user.status = list.status;
              }
              scope.UpdateUser = (userUpdate)=>{
                     console.log(userUpdate);
-                    
+                    scope.namesArr[userUpdate.index] = {
+                        name : userUpdate.name,
+                        gender : userUpdate.gender,
+                        status : userUpdate.status,
+                    }
+                    console.log(scope.namesArr);
              }
-           
-           
-           
-           
-           
              // close edit
             let btnClose = document.querySelector('.btnClose');
             btnClose.addEventListener('click', e =>{

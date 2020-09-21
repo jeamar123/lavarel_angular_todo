@@ -28,4 +28,5 @@
   <script src="../../templates/tasks/function.js"></script>
   <script src="../../templates/mike/function.js"></script>
   <script src="../../templates/users/function.js"></script>
+  <script src="../../templates/mikeExam/function.js"></script>
 </html>
