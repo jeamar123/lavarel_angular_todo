@@ -11,6 +11,7 @@ app.directive('examDirective', [
           scope.usersArr = [];
           //blank object for adding users
           scope.newUser = {};
+          scope.isForUpdate = false;
   
           //getting users list
           scope.getUsersList = () =>{
@@ -25,7 +26,7 @@ app.directive('examDirective', [
           };
 
           //adding and updating button 
-          scope.addUserBtn = newUserFormData =>{
+          scope.addUserBtn = (newUserFormData, type) =>{
             //container for new or updated user
             let newUserData = {
                 id: newUserFormData.id,
@@ -34,13 +35,22 @@ app.directive('examDirective', [
                 age: newUserFormData.age,
                 status: newUserFormData.status,
             }
-         
-            //for add
-            $http.post(`https://mednefits.getsandbox.com/users`, newUserData)
-            .success(successResponse =>{
-                scope.newUser = {};
-                scope.getUsersList();
-            })
+
+            if(type == 'update'){
+              $http.post(`https://mednefits.getsandbox.com:443/users/update/`+ newUserData.id, newUserData)
+                .success(successResponse =>{
+                  scope.newUser = {};
+                  scope.isForUpdate = false;
+                  scope.getUsersList();
+                })
+            }else{
+              //for add
+              $http.post(`https://mednefits.getsandbox.com/users`, newUserData)
+              .success(successResponse =>{
+                  scope.newUser = {};
+                  scope.getUsersList();
+              })
+            }
           
             //for edit
             // $http.post(`https://mednefits.getsandbox.com:443/users/update/`+ newUserData.id, newUserData)
@@ -74,7 +84,7 @@ app.directive('examDirective', [
            scope.deleteUser = listRow =>{
             $http.get(`https://mednefits.getsandbox.com:443/users/delete/`+ listRow.id)
             .success(successResponse =>{
-              scope.usersArr.splice(listRow, 1);
+              // scope.usersArr.splice(listRow, 1);
               scope.getUsersList();
             });
            };
@@ -86,6 +96,8 @@ app.directive('examDirective', [
                  scope.newUser.gender = listRow.gender,
                  scope.newUser.age = listRow.age,
                  scope.newUser.status = listRow.status
+
+            scope.isForUpdate = true;
           }
 
         scope.onLoad = function () {

@@ -22,7 +22,8 @@
               <td ng-bind="list.age"></td>
               <td ng-bind="list.status"></td>
               <td>
-                <button class="btn" ng-click="editUser(list)">Edit</button>
+                <button class="btn" ng-click="addUserBtn(list, 'update')">Edit</button>
+                <button class="btn" ng-click="addUserBtn(list, 'add')">ADD</button>
                 <button class="btn" ng-click="deleteUser(list)">Delete</button>
               </td>
             </tr>
