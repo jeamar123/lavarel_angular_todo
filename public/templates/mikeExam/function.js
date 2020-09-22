@@ -20,6 +20,9 @@ app.directive('examDirective', [
           scope.getUsersList = () =>{
             $http.get(`https://mednefits.getsandbox.com/users`)
             .success( successResponse =>{
+              if(successResponse.status == false){
+                swal('Error!', successResponse.message, 'error');
+              }
               scope.usersArr = successResponse;
             })
             .error(errorResponse =>{
