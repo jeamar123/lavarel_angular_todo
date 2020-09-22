@@ -1,0 +1,124 @@
+<div class="transactions-container" transactions-directive>
+  <div>
+    <div class="tbl-header-container">
+      <p class="section-title">Transactions</p>
+      <div class="btn-option-container">
+        <button class="btn"><i class="fa fa-plus"></i></button>
+        <button class="btn btn-red" ng-click="resetAllData()"><i class="fa fa-refresh"></i></button>
+      </div>
+    </div>
+    
+
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <!-- <th>
+              <input type="checkbox">
+            </th> -->
+            <th>ID</th>
+            <th>Full Name</th>
+            <th>Service</th>
+            <th>Payment Due Date</th>
+            <th>Amount Due</th>
+            <th>Payment Amount</th>
+            <th>Payment Status</th>
+            <th>Payment Date</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <!-- <td>
+              <input type="checkbox">
+            </td> -->
+            <td>
+              MED000<span>1</span>
+            </td>
+            <td>
+              Allan Alzula
+            </td>
+            <td>
+              Dental Checkup
+            </td>
+            <td>
+              22/09/20
+            </td>
+            <td>
+              <span>SGD</span>
+              <span>0.00</span>
+            </td>
+            <td>
+              <span>SGD</span>
+              <span>0.00</span>
+            </td>
+            <td>
+              <div class="paid">PAID</div>
+              <div class="pending">PENDING</div>
+            </td>
+            <td>
+              <div>22/09/20</div>
+            </td>
+            <td>
+              <div class="action-drop-wrapper">
+                <i class="fa fa-caret-down"></i>
+                
+                <div class="action-drop">
+                  <div class="action-div">Update Transaction</div>
+                  <div class="action-div">Delete Transaction</div>
+                  <div class="action-div">Record Payment</div>
+                  <div class="action-div">Remove Payment</div>
+                </div>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div>
+    <form>
+      <h3>{{ isUpdateTransactions ? 'Update' : 'Create' }} Transaction</h3>
+      <div class="input-div">
+        <label for="">Name</label>
+        <input type="text" >
+      </div>
+
+      <div class="input-div">
+        <label for="">Service</label>
+        <select>
+          <option value=""></option>
+          <option value="General Practice">General Practice</option>
+          <option value="Health Screening">Health Screening</option>
+          <option value="Traditional Chinese Medicine">Traditional Chinese Medicine</option>
+          <option value="Medical Specialist">Medical Specialist</option>
+          <option value="Dental">Dental</option>
+        </select>
+      </div>
+
+      <div class="input-div">
+        <label for="">Payment Due Date</label>
+        <input type="text" class="datepicker" >
+      </div>
+
+      <div class="input-div">
+        <label for="">Amount Due</label>
+        <input type="number" min="0">
+      </div>
+
+      <div class="input-div text-right">
+        <button 
+          class="btn" 
+        >Submit</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+
+
+<style scoped>
+  @import url('../../templates/transactions/style.css'); 
+</style>

@@ -64,6 +64,14 @@ app.config(function($stateProvider, $urlRouterProvider){
         }
       }
     })
+    .state('container.transactions',{
+      url: '/transactions',
+      views:{
+        'child-content@container':{
+          templateUrl: 'templates/transactions/index.html'
+        }
+      }
+    })
     
     $urlRouterProvider.otherwise('/container/home');
     
