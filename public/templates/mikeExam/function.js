@@ -11,7 +11,10 @@ app.directive('examDirective', [
           scope.usersArr = [];
           //blank object for adding users
           scope.newUser = {};
+          //button edit trap
           scope.isForUpdate = false;
+
+          scope.btnName = "Add User";
   
           //getting users list
           scope.getUsersList = () =>{
@@ -26,8 +29,7 @@ app.directive('examDirective', [
           };
 
           //adding and updating button 
-          scope.addUserBtn = (newUserFormData, type) =>{
-            //container for new or updated user
+          scope.addUserBtn = newUserFormData =>{
             let newUserData = {
                 id: newUserFormData.id,
                 name: newUserFormData.name,
@@ -35,68 +37,58 @@ app.directive('examDirective', [
                 age: newUserFormData.age,
                 status: newUserFormData.status,
             }
+           
 
-            if(type == 'update'){
+            if( scope.isForUpdate == true){
+              scope.btnName = "Edit User";
               $http.post(`https://mednefits.getsandbox.com:443/users/update/`+ newUserData.id, newUserData)
                 .success(successResponse =>{
                   scope.newUser = {};
                   scope.isForUpdate = false;
                   scope.getUsersList();
+                  
+                  
                 })
             }else{
               //for add
+              scope.btnName = "Add User";
               $http.post(`https://mednefits.getsandbox.com/users`, newUserData)
               .success(successResponse =>{
                   scope.newUser = {};
                   scope.getUsersList();
               })
             }
-          
-            //for edit
-            // $http.post(`https://mednefits.getsandbox.com:443/users/update/`+ newUserData.id, newUserData)
-            // .success(successResponse =>{
-            //     scope.newUser = {};
-            //     scope.getUsersList();
-            // })
-
-
-            
-            // let userCondition = ()=>{
-            //     if (userCondition) {
-            //         $http.post(`https://mednefits.getsandbox.com/users`, newUserData)
-            //         .success(successResponse =>{
-            //             scope.newUser = {};
-            //             scope.getUsersList();
-            //         })
-            //     } else {
-            //         $http.post(`https://mednefits.getsandbox.com:443/users/update/`+ newUserData.id, newUserData)
-            //         .success(successResponse =>{
-            //          scope.newUser = {};
-            //          scope.getUsersList();
-            //         })
-            //     }
-            // }
-            
            
           };
 
            //Delete User Button
            scope.deleteUser = listRow =>{
-            $http.get(`https://mednefits.getsandbox.com:443/users/delete/`+ listRow.id)
-            .success(successResponse =>{
-              // scope.usersArr.splice(listRow, 1);
-              scope.getUsersList();
-            });
-           };
+            swal({
+                title: "Confirm",
+                text: "Are you sure you want to delete?",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonText: "Confirm",
+                cancelButtonText: "No",
+              },
+              function(isConfirm){
+                  if (isConfirm) {
+                    $http.get(`https://mednefits.getsandbox.com:443/users/delete/`+ listRow.id)
+                    .success(successResponse =>scope.getUsersList())        
+                    }
+                }
+                )
+           }
+
 
           //Edit Button
           scope.editUser = listRow =>{
-                 scope.newUser.id =  listRow.id,
-                 scope.newUser.name = listRow.name,
-                 scope.newUser.gender = listRow.gender,
-                 scope.newUser.age = listRow.age,
-                 scope.newUser.status = listRow.status
-
+            scope.newUser.id =  listRow.id,
+            scope.newUser.name = listRow.name,
+            scope.newUser.gender = listRow.gender,
+            scope.newUser.age = listRow.age,
+            scope.newUser.status = listRow.status
+            //making the edit button true
             scope.isForUpdate = true;
           }
 

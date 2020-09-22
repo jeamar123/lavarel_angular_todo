@@ -19,6 +19,8 @@
   <script src="./libraries/sweetalert.min.js"></script>
   <script src="./libraries/angular.min.js"></script>
   <script src="./libraries/angular-ui-router.min.js"></script>
+  <script src="https://use.fontawesome.com/9830ebe28d.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
   <script src="./process/app.js"></script>
 
 

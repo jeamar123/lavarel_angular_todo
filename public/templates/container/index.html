@@ -16,11 +16,29 @@
       <li>
         <a href="javascript:void(0)" ui-sref="container.users" ui-sref-active="active">Users</a>
       </li>
-      <li>
-        <a href="javascript:void(0)" ui-sref="container.mikeExam" ui-sref-active="active">Mike Exam</a>
-      </li>
     </ul>
   </div>
+  
+  <div class="user">
+      <div x-data="{ open: false }">
+        <button @click="open = true">
+          <img src="../images/icon.png" alt="">&nbsp;&nbsp;
+          <span><i class="fa fa-angle-down" aria-hidden="true"></i></span>
+        </button>
+    
+        <ul x-show="open"  @click.away="open = false"  @click="open = false">
+           <li>
+            <a href="javascript:void(0)" ui-sref="container.mikeExam" ui-sref-active="active"><i class="fa fa-user" aria-hidden="true"></i>&nbsp;&nbsp;Mike Exam</a>
+          </li>
+           <li><a href="#"><i class="fa fa-cog" aria-hidden="true"></i>&nbsp;&nbsp;Manage Account</a></li>
+           <li><a href="#"><i class="fa fa-sign-out" aria-hidden="true"></i>&nbsp;&nbsp;Logout</a></li>
+        </ul>
+    </div>
+  </div>
+
+
+
+
   <div class="content-container" ui-view="child-content"></div>
 </div>
 

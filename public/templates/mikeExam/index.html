@@ -15,16 +15,15 @@
             </tr>
           </thead>
           <tbody>
-            <tr ng-repeat="list in usersArr" >
+            <tr ng-repeat="list in usersArr">
               <td ng-bind="list.id"></td>
               <td ng-bind="list.name"></td>
               <td ng-bind="list.gender"></td>
               <td ng-bind="list.age"></td>
               <td ng-bind="list.status"></td>
               <td>
-                <button class="btn" ng-click="addUserBtn(list, 'update')">Edit</button>
-                <button class="btn" ng-click="addUserBtn(list, 'add')">ADD</button>
-                <button class="btn" ng-click="deleteUser(list)">Delete</button>
+                <button class="btn" ng-click="editUser(list)"><i class="fa fa-pencil" aria-hidden="true"></i>&nbsp;Edit</button>
+                <button class="btn" ng-click="deleteUser(list)"><i class="fa fa-trash-o" aria-hidden="true"></i>&nbsp;Delete</button>
               </td>
             </tr>
           </tbody>
@@ -73,7 +72,7 @@
             class="btn" 
             ng-disabled="!newUser.id || !newUser.name || !newUser.gender || !newUser.age || !newUser.status" 
             ng-click="addUserBtn(newUser)"
-          >Submit</button>
+          ><i class="fa fa-check-circle-o" aria-hidden="true"></i>&nbsp;&nbsp;{{ btnName }}</button>
         </div>
       </form>
     </div>
