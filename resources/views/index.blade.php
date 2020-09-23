@@ -38,4 +38,5 @@
   <script src="../../templates/users/function.js"></script>
   <script src="../../templates/mikeExam/function.js"></script>
   <script src="../../templates/transactions/function.js"></script>
+  <script src="../../templates/myTransaction/function.js"></script>
 </html>

@@ -1,0 +1,139 @@
+<div  mytransaction-directive>
+
+  <div class="transactions-container">
+
+    <div>
+      <div class="tbl-header-container">
+        <p class="section-title">Transactions</p>
+        <div class="btn-option-container">
+          <button class="btn" ng-click="showForm()"><i class="fa fa-plus"></i></button>
+          <button class="btn btn-red" ng-click="resetAllData()"><i class="fa fa-refresh"></i></button>
+        </div>
+      </div>
+      
+  
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <!-- <th>
+                <input type="checkbox">
+              </th> -->
+              <th>ID</th>
+              <th>Full Name</th>
+              <th>Service</th>
+              <th>Payment Due Date</th>
+              <th>Amount Due</th>
+              <th>Payment Amount</th>
+              <th>Payment Status</th>
+              <th>Payment Date</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="list in transactionArr">
+              <!-- <td>
+                <input type="checkbox">
+              </td> -->
+              <td >MED000<span ng-bind="list.id"></span></td>
+              <td ng-bind="list.name"></td>
+              <td ng-bind="list.service"></td>
+              <td ng-bind="list.payment_due"></td>
+              <td>
+                <span>SGD</span>
+                <span ng-bind="list.payment_amount_due">0.00</span>
+              </td>
+
+
+              <div>
+                <td>
+                  <span>SGD</span>
+                  <span>0.00</span>
+                </td>
+                <td>
+                  <div class="paid">PAID</div>
+                  <div class="pending">PENDING</div>
+                </td>
+                <td>
+                  <div>22/09/20</div>
+                </td>
+              </div>
+
+
+              <td>
+                <div class="action-drop-wrapper" x-data="{ open: false }">
+                  <i class="fa fa-caret-down" @click="open = true"></i>
+                  <div class="action-drop"  x-show="open" @click.away="open = false" @click="open = false">
+                    <div class="action-div" ng-click="updateTransaction(list)">Update Transaction</div>
+                    <div class="action-div" ng-click="deleteTransaction(list)">Delete Transaction</div>
+                    <div class="action-div" ng-click="modalForm()">Record Payment</div>
+                    <div class="action-div">Remove Payment</div>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  
+    <div>
+      <form class="form">
+        <h3>{{ isUpdateTransactions ? 'Update' : 'Create' }} Transaction</h3>
+  
+        <div class="input-div">
+          <label for="">Name</label>
+          <input type="text" ng-model="newTransaction.name">
+        </div>
+  
+        <div class="input-div">
+          <label for="">Service</label>
+          <select ng-model="newTransaction.service">
+            <option value=""></option>
+            <option value="General Practice">General Practice</option>
+            <option value="Health Screening">Health Screening</option>
+            <option value="Traditional Chinese Medicine">Traditional Chinese Medicine</option>
+            <option value="Medical Specialist">Medical Specialist</option>
+            <option value="Dental">Dental</option>
+          </select>
+        </div>
+  
+        <div class="input-div">
+          <label for="">Payment Due Date</label>
+          <input type="text" class="datepicker" ng-model="newTransaction.payment_due">
+        </div>
+  
+        <div class="input-div">
+          <label for="">Amount Due</label>
+          <input type="number" min="0" ng-model="newTransaction.payment_amount_due">
+        </div>
+  
+        <div class="input-div text-right">
+          <button class="btn" ng-disabled="!newTransaction.name || !newTransaction.service || !newTransaction.payment_due || !newTransaction.payment_amount_due" 
+          ng-click="addNewTransaction(newTransaction)">Submit</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="formModal">
+    <div class="formModal-container">
+      <div class="closeContainer">
+        <p ng-click="modalClose()">x</p>
+      </div>
+      <form action="">
+        <label for="">Payment Date</label><br>
+        <input type="text" class="datepicker" ng-model="payment.payment_date"><br>
+        <label for="">Payment Amount</label><br>
+        <input type="text" ng-model="payment.payment_amount">
+        <button class="btn" ng-click="paymentPayload(payment)">Add Payment Details</button>
+      </form>
+    </div>
+  </div>
+
+  
+  </div>
+  
+  <style scoped>
+    @import url('../../templates/myTransaction/style.css'); 
+  </style>
