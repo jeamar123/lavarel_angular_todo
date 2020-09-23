@@ -66,7 +66,7 @@
                   <div class="action-drop"  x-show="open" @click.away="open = false" @click="open = false">
                     <div class="action-div" ng-click="updateTransaction(list)">Update Transaction</div>
                     <div class="action-div" ng-click="deleteTransaction(list)">Delete Transaction</div>
-                    <div class="action-div" ng-click="modalForm()">Record Payment</div>
+                    <div class="action-div" ng-click="modalForm(list)">Record Payment</div>
                     <div class="action-div">Remove Payment</div>
                   </div>
                 </div>
@@ -121,12 +121,12 @@
       <div class="closeContainer">
         <p ng-click="modalClose()">x</p>
       </div>
-      <form action="">
+      <form>
         <label for="">Payment Date</label><br>
         <input type="text" class="datepicker" ng-model="payment.payment_date"><br>
         <label for="">Payment Amount</label><br>
         <input type="text" ng-model="payment.payment_amount">
-        <button class="btn" ng-click="paymentPayload(payment)">Add Payment Details</button>
+        <button class="btn" ng-click="addPayment(payment)">Add Payment Details</button>
       </form>
     </div>
   </div>

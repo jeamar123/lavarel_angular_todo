@@ -73,7 +73,7 @@ scope.payment = {};
 scope.addPayment = paymentFormData =>{
 
     let paymentPayload = {
-        id: paymentFormData.id,
+        id: scope.selected_id,
         payment_date: paymentFormData.payment_date,
         payment_amount: paymentFormData.payment_amount,
     }
@@ -101,14 +101,17 @@ scope.showForm = () =>{
     mainForm.classList.add('form-js');
 }
 // MODAL OPEN
-scope.modalForm = ()=>{
+scope.modalForm = (list)=>{
     let formModal = document.querySelector('.formModal');
     formModal.classList.add('formModal-js');
+
+    scope.selected_id = list.id;
 }
 // MODAL CLOSE
 scope.modalClose = ()=>{
     let formModal = document.querySelector('.formModal');
     formModal.classList.remove('formModal-js');
+    scope.selected_id = null;
 }
 // DATE PICKER
 scope.initializeDatePicker	=	function(){
