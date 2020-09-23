@@ -38,7 +38,7 @@
               <td >MED000<span ng-bind="list.id"></span></td>
               <td ng-bind="list.name"></td>
               <td ng-bind="list.service"></td>
-              <td ng-bind="list.payment_due"></td>
+              <td ng-bind="formatMomentDate(list.payment_due, ['DD/MM/YYYY', 'YYYY-MM-DD'], 'DD/MM/YYYY')"></td>
               <td>
                 <span>SGD</span>
                 <span ng-bind="list.payment_amount_due">0.00</span>
