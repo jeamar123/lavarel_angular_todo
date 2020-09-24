@@ -1,7 +1,5 @@
 <div  mytransaction-directive>
-
   <div class="transactions-container">
-
     <div>
       <div class="tbl-header-container">
         <p class="section-title">Transactions</p>
@@ -41,23 +39,19 @@
               <td ng-bind="list.payment_due"></td>
               <td>
                 <span>SGD</span>
-                <span ng-bind="list.payment_amount_due">0.00</span>
+                <span ng-bind="list.payment_amount_due"></span>
               </td>
-
-
-              <div>
-                <td>
-                  <span>SGD</span>
-                  <span>0.00</span>
-                </td>
-                <td>
-                  <div class="paid">PAID</div>
-                  <div class="pending">PENDING</div>
-                </td>
-                <td>
-                  <div>22/09/20</div>
-                </td>
-              </div>
+              <td >
+                <span>SGD</span>
+                <span ng-bind="list.payment_amount"></span>
+              </td>
+              <td>
+                <div class="paid" ng-if="list.paid == true">PAID</div>
+                <div class="pending" ng-if="list.paid == false">PENDING</div>
+              </td>
+              <td ng-bind="list.payment_date" >
+                <div></div>
+              </td>
 
 
               <td>
@@ -67,7 +61,7 @@
                     <div class="action-div" ng-click="updateTransaction(list)">Update Transaction</div>
                     <div class="action-div" ng-click="deleteTransaction(list)">Delete Transaction</div>
                     <div class="action-div" ng-click="modalForm(list)">Record Payment</div>
-                    <div class="action-div">Remove Payment</div>
+                    <div class="action-div" ng-if="list.paid == true" ng-click="removePayment(list)">Remove Payment</div>
                   </div>
                 </div>
               </td>

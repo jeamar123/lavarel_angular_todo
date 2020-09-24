@@ -40,8 +40,6 @@ app.directive('examDirective', [
                 age: newUserFormData.age,
                 status: newUserFormData.status,
             }
-           
-
             if( scope.isForUpdate == true){
               scope.btnName = "Edit User";
               $http.post(`https://mednefits.getsandbox.com:443/users/update/`+ newUserData.id, newUserData)
@@ -49,8 +47,6 @@ app.directive('examDirective', [
                   scope.newUser = {};
                   scope.isForUpdate = false;
                   scope.getUsersList();
-                  
-                  
                 })
             }else{
               //for add
