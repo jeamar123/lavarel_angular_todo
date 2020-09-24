@@ -14,6 +14,7 @@ scope.transactionArr = [];
 scope.newTransaction = {};
 scope.UpdateBtn = false;
 scope.payment = {};
+scope.isUpdateTransactions = false;
 
 // SHOWING TRANSACTION LIST
 scope.getTransactionList = () =>{
@@ -34,13 +35,23 @@ scope.addNewTransaction = newTransactionFormData =>{
         payment_due: newTransactionFormData.payment_due,
         payment_amount_due: newTransactionFormData.payment_amount_due,
     }
-    $http.post(`https://mednefits.getsandbox.com:443/transactions/update`, editTransactionPayload)
-        .success(response =>{
-        scope.newTransaction = {};
-        scope.getTransactionList();
-        scope.hideForm();
-        scope.UpdateBtn = false;
-        });
+    swal({
+        title: "Transaction Updated",
+        type: "success",
+        icon: 'success',
+    },function(isConfirm){
+        if (isConfirm) {
+            $http.post(`https://mednefits.getsandbox.com:443/transactions/update`, editTransactionPayload)
+            .success(response =>{
+            scope.newTransaction = {};
+            scope.getTransactionList();
+            scope.hideForm();
+            scope.UpdateBtn = false;
+            scope.isUpdateTransactions = false;
+            });
+        }
+    }
+    ) 
     }else{
     let newTransactionPayload = {
         name: newTransactionFormData.name,
@@ -67,15 +78,12 @@ scope.addNewTransaction = newTransactionFormData =>{
     )
     }
 };
-scope.dots = (number) =>{
-    return `${number}.00`
-}
 
 // DELETE TRANSACTION USER
 scope.deleteTransaction = listRow =>{
     swal({
         title: "Confirm",
-        text: "Are you sure you want to delete?",
+        text: "Are you sure you want to delete transaction?",
         type: "warning",
         showCancelButton: true,
         confirmButtonText: "Confirm",
@@ -100,18 +108,43 @@ scope.addPayment = paymentFormData =>{
         payment_date: paymentFormData.payment_date,
         payment_amount: paymentFormData.payment_amount,
     }
-    $http.post(`https://mednefits.getsandbox.com:443/transactions/record_payment`, paymentPayload)
-    .success(response =>{
-        scope.getTransactionList();
-    })
-}
+    swal({
+        title: "Payment Added",
+        type: "success",
+        icon: 'success',
+    },
+    function(isConfirm){
+        if(isConfirm){
+            $http.post(`https://mednefits.getsandbox.com:443/transactions/record_payment`, paymentPayload)
+            .success(response =>{
+                scope.modalClose();
+                scope.getTransactionList();
+            })
+        }
+    }
+    )   
+};
+
 // DELETE PAYMENT
 scope.removePayment = listRow=>{
-    $http.get(` https://mednefits.getsandbox.com:443/transactions/remove_payment/`+ listRow.id)
-    .success(response =>{
-        scope.getTransactionList();
-    })
-}
+    swal({
+        title: "Confirm",
+        text: "Are you sure you want to remove payment?",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Confirm",
+        cancelButtonText: "No",
+    },
+    function(isConfirm){
+        if(isConfirm){
+            $http.get(` https://mednefits.getsandbox.com:443/transactions/remove_payment/`+ listRow.id)
+            .success(response =>{
+            scope.getTransactionList();
+            })
+        }
+    }
+    )    
+};
 
 
 // FUNCTIONS SECTION
@@ -124,6 +157,7 @@ scope.updateTransaction = listUpdateRow =>{
     scope.newTransaction.payment_amount_due = listUpdateRow.payment_amount_due
     scope.UpdateBtn = true;
     scope.showForm();
+    scope.isUpdateTransactions = true;
 }
 // SHOW FORM
 scope.showForm = () =>{
