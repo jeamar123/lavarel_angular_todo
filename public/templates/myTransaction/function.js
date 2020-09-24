@@ -159,7 +159,12 @@ scope.initializeDatePicker	=	function(){
         });
     };
 
-
+    scope.formatMomentDate  =   function(date,from,to){
+        // date = date that needs to be formatted
+        // from = current format of the date (e.g YYYY-MM-DD) or array of possible formats (e.g ['YYYY-MM-DD','DD/MM/YYYY'])
+        // to = format that you needed
+        return moment(date,from).format(to);
+    }
 
 
 
