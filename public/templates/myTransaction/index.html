@@ -9,7 +9,7 @@
         </div>
       </div>
       
-  
+      <input type="text" ng-model="search" placeholder="Search . . ."> <br><br>
       <div class="table-container">
         <table>
           <thead>
@@ -29,7 +29,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr ng-repeat="list in transactionArr">
+            <tr ng-repeat="list in transactionArr | filter: search">
               <!-- <td>
                 <input type="checkbox">
               </td> -->
@@ -50,9 +50,10 @@
                 <div class="paid" ng-if="list.paid == true">PAID</div>
                 <div class="pending" ng-if="list.paid == false">PENDING</div>
               </td>
-              <td ng-bind="list.payment_date" >
-                <div></div>
-              </td>
+              <!-- <td ng-bind="list.payment_date" > -->
+                <td>
+                  <div ng-if="list.payment_date != null" ng-bind="formatMomentDate(list.payment_date, ['DD/MM/YYYY', 'YYYY-MM-DD'], 'DD/MM/YYYY')"></div>
+                </td>
 
 
               <td>
@@ -95,12 +96,12 @@
   
         <div class="input-div">
           <label for="">Payment Due Date</label>
-          <input type="text" class="datepicker" ng-model="newTransaction.payment_due">
+          <input type="text" class="datepicker" ng-model="newTransaction.payment_due ">
         </div>
   
         <div class="input-div">
-          <label for="">Amount Due</label>
-          <input type="number" min="0" ng-model="newTransaction.payment_amount_due">
+          <label for="">Payment Due</label>
+          <input type="number" min="0" ng-model="newTransaction.payment_amount_due" >
         </div>
   
         <div class="input-div text-right">
@@ -120,7 +121,8 @@
         <label for="">Payment Date</label><br>
         <input type="text" class="datepicker" ng-model="payment.payment_date"><br>
         <label for="">Payment Amount</label><br>
-        <input type="text" ng-model="payment.payment_amount">
+        <input type="text" ng-if="record_payment.status == false">
+        <input type="text" ng-if="record_payment.status != false" ng-model="payment.payment_amount">
         <button class="btn" ng-click="addPayment(payment)"><i class="fa fa-plus"></i>&nbsp;Add Payment</button>
       </form>
     </div>

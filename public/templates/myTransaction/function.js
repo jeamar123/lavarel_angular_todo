@@ -41,6 +41,7 @@ scope.addNewTransaction = newTransactionFormData =>{
         icon: 'success',
     },function(isConfirm){
         if (isConfirm) {
+            newTransactionPayload.payment_due = scope.formatMomentDate(newTransactionPayload.payment_due,['DD/MM/YYYY', 'YYYY-MM-DD'],'YYYY-MM-DD')
             $http.post(`https://mednefits.getsandbox.com:443/transactions/update`, editTransactionPayload)
             .success(response =>{
             scope.newTransaction = {};
@@ -66,11 +67,14 @@ scope.addNewTransaction = newTransactionFormData =>{
         },
         function(isConfirm){
             if(isConfirm){
+            newTransactionPayload.payment_due = scope.formatMomentDate(newTransactionPayload.payment_due,['DD/MM/YYYY', 'YYYY-MM-DD'],'YYYY-MM-DD')
             $http.post(`https://mednefits.getsandbox.com:443/transactions/create`, newTransactionPayload)
             .success(response =>{
+            console.log(scope.formatMomentDate(newTransactionPayload.payment_due,['DD/MM/YYYY', 'YYYY-MM-DD'],'YYYY-MM-DD' ));
             scope.newTransaction = {};
             scope.hideForm();
             scope.getTransactionList();
+
             
             });
         }
@@ -105,25 +109,33 @@ scope.deleteTransaction = listRow =>{
 scope.addPayment = paymentFormData =>{
     let paymentPayload = {
         id: scope.selected_id,
+        amount_due:scope.selected_amountDue,
         payment_date: paymentFormData.payment_date,
         payment_amount: paymentFormData.payment_amount,
     }
-    swal({
-        title: "Payment Added",
-        type: "success",
-        icon: 'success',
-    },
-    function(isConfirm){
-        if(isConfirm){
-            $http.post(`https://mednefits.getsandbox.com:443/transactions/record_payment`, paymentPayload)
-            .success(response =>{
-                scope.modalClose();
-                scope.getTransactionList();
-            })
-        }
+    paymentPayload.payment_date = scope.formatMomentDate(paymentFormData.payment_date,['DD/MM/YYYY', 'YYYY-MM-DD'],'YYYY-MM-DD')
+    $http.post(`https://mednefits.getsandbox.com:443/transactions/record_payment`, paymentPayload)
+    .success(response =>{
+        if (response.status != false) {
+            scope.modalClose();
+            scope.getTransactionList();
+            scope.payment = {};
+            swal({
+                title: "Payment Added",
+                type: "success",
+                icon: 'success',
+            });
+            }else{
+            swal({
+                        title: "Confirm",
+                        text: response.message,
+                        type: "warning",
+                        confirmButtonText: "Confirm"
+                    });
+        } 
     }
-    )   
-};
+)};
+
 
 // DELETE PAYMENT
 scope.removePayment = listRow=>{
@@ -173,12 +185,14 @@ scope.modalForm = (list)=>{
     let formModal = document.querySelector('.formModal');
     formModal.classList.add('formModal-js');
     scope.selected_id = list.id;
+    scope.selected_amountDue = list.payment_amount_due;
 }
 // MODAL CLOSE
 scope.modalClose = ()=>{
     let formModal = document.querySelector('.formModal');
     formModal.classList.remove('formModal-js');
     scope.selected_id = null;
+    scope.selected_amountDue = null;
 }
 
 // DATE PICKER
