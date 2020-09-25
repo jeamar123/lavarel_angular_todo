@@ -15,6 +15,7 @@ scope.newTransaction = {};
 scope.UpdateBtn = false;
 scope.payment = {};
 scope.isUpdateTransactions = false;
+scope.buttonName = "Add Transaction";
 
 // SHOWING TRANSACTION LIST
 scope.getTransactionList = () =>{
@@ -41,7 +42,7 @@ scope.addNewTransaction = newTransactionFormData =>{
         icon: 'success',
     },function(isConfirm){
         if (isConfirm) {
-            newTransactionPayload.payment_due = scope.formatMomentDate(newTransactionPayload.payment_due,['DD/MM/YYYY', 'YYYY-MM-DD'],'YYYY-MM-DD')
+            editTransactionPayload.payment_due = scope.formatMomentDate(editTransactionPayload.payment_due,['DD/MM/YYYY', 'YYYY-MM-DD'],'YYYY-MM-DD')
             $http.post(`https://mednefits.getsandbox.com:443/transactions/update`, editTransactionPayload)
             .success(response =>{
             scope.newTransaction = {};
@@ -49,6 +50,7 @@ scope.addNewTransaction = newTransactionFormData =>{
             scope.hideForm();
             scope.UpdateBtn = false;
             scope.isUpdateTransactions = false;
+            scope.buttonName = "Add Transaction";
             });
         }
     }
@@ -170,6 +172,7 @@ scope.updateTransaction = listUpdateRow =>{
     scope.UpdateBtn = true;
     scope.showForm();
     scope.isUpdateTransactions = true;
+    scope.buttonName = "Update Transaction";
 }
 // SHOW FORM
 scope.showForm = () =>{
@@ -213,29 +216,6 @@ scope.initializeDatePicker	=	function(){
         // to = format that you needed
         return moment(date,from).format(to);
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

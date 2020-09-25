@@ -10,6 +10,7 @@
       </div>
       
       <input type="text" ng-model="search" placeholder="Search . . ."> <br><br>
+
       <div class="table-container">
         <table>
           <thead>
@@ -37,10 +38,9 @@
               <td ng-bind="list.name | uppercase"></td>
               <td ng-bind="list.service"></td>
               <td ng-bind="formatMomentDate(list.payment_due, ['DD/MM/YYYY', 'YYYY-MM-DD'], 'DD/MM/YYYY')"></td>
-              <!-- <td ng-bind="list.payment_due"></td> -->
               <td>
                 <!-- <span>SGD</span> -->
-                <span ng-bind="list.payment_amount_due | number:2"></span>
+                <span ng-bind="list.payment_amount_due | number:2 "></span>
               </td>
               <td >
                 <!-- <span>SGD</span> -->
@@ -50,12 +50,9 @@
                 <div class="paid" ng-if="list.paid == true">PAID</div>
                 <div class="pending" ng-if="list.paid == false">PENDING</div>
               </td>
-              <!-- <td ng-bind="list.payment_date" > -->
                 <td>
                   <div ng-if="list.payment_date != null" ng-bind="formatMomentDate(list.payment_date, ['DD/MM/YYYY', 'YYYY-MM-DD'], 'DD/MM/YYYY')"></div>
                 </td>
-
-
               <td>
                 <div class="action-drop-wrapper" x-data="{ open: false }">
                   <i class="fa fa-caret-down" @click="open = true"></i>
@@ -73,6 +70,8 @@
       </div>
     </div>
   
+
+    <!-------------------- Main Form ----------------------->
     <div>
       <form class="form">
         <h3>{{ isUpdateTransactions ? 'Update' : 'Create' }} Transaction</h3>
@@ -106,12 +105,15 @@
   
         <div class="input-div text-right">
           <button class="btn" ng-disabled="!newTransaction.name || !newTransaction.service || !newTransaction.payment_due || !newTransaction.payment_amount_due" 
-          ng-click="addNewTransaction(newTransaction)">Submit</button>
+          ng-click="addNewTransaction(newTransaction)">{{buttonName}}</button>
         </div>
       </form>
     </div>
   </div>
 
+
+
+  <!-------------------- Modal Form ----------------------->
   <div class="formModal">
     <div class="formModal-container">
       <div class="closeContainer">
